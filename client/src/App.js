@@ -6,14 +6,17 @@ import { EmailVerification } from "./pages/admin-registration/EmailVerification"
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Dashboard } from "./pages/dashboard/Dashboard.js";
+import { Product } from "./pages/products/Product";
+
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
           {/* private router */}
-          <Route path="/dashboard" element={<Dashboard />} />
 
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/products" element={<Product />} />
           {/* Public route */}
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<AdminRegistration />} />
