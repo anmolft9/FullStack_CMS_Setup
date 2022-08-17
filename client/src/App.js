@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Dashboard } from "./pages/dashboard/Dashboard.js";
 import { Product } from "./pages/products/Product";
+import { PrivateRouter } from "./components/private-router/PrivateRouter";
 
 function App() {
   return (
@@ -15,7 +16,14 @@ function App() {
         <Routes>
           {/* private router */}
 
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRouter>
+                <Dashboard />
+              </PrivateRouter>
+            }
+          />
           <Route path="/products" element={<Product />} />
           {/* Public route */}
           <Route path="/" element={<LoginPage />} />
