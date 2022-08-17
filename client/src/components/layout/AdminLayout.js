@@ -3,7 +3,7 @@ import { Footer } from "../footer/Footer";
 import { Header } from "../header/Header";
 import { Sidemenu } from "../side-menu/SideMenu";
 
-export const AdminLayout = () => {
+export const AdminLayout = ({ children }) => {
   return (
     <div>
       {/* header */}

@@ -24,7 +24,14 @@ function App() {
               </PrivateRouter>
             }
           />
-          <Route path="/products" element={<Product />} />
+          <Route
+            path="/products"
+            element={
+              <PrivateRouter>
+                <Product />
+              </PrivateRouter>
+            }
+          />
           {/* Public route */}
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<AdminRegistration />} />

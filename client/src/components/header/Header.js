@@ -3,16 +3,23 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { adminLogout } from "../../pages/login/userAction.js";
 import { setShowMenu } from "../../pages/systemState/SystemSlice";
 
 export const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.admin);
 
   const handleShow = () => {
     dispatch(setShowMenu(true));
+  };
+
+  const handleOnLogout = () => {
+    dispatch(adminLogout());
+    navigate("/");
   };
   return (
     <Navbar collapseOnSelect bg="info" variant="light" expand="md">
@@ -30,7 +37,7 @@ export const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             {user._id ? (
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to="/" onClick={handleOnLogout}>
                 logout
               </Link>
             ) : (
