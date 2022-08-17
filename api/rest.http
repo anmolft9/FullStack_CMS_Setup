@@ -30,3 +30,15 @@ Content-Type: application/json
 
 }
 
+
+###category apis
+POST http://localhost:8000/api/v1/category
+Content-Type: application/json
+
+{
+"status": "active",
+"name": "electronics",
+"parentId": "ididididididididi"
+
+}
+
