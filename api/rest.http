@@ -39,8 +39,8 @@ Content-Type: application/json
 
 {
 "status": "active",
-"name": "mobile",
-"parentId": "62fd7a704cb0a5b67129271b"
+"name": "desktop",
+"parentId": ""
 
 }
 
