@@ -30,37 +30,37 @@ export const Sidemenu = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <Link onClick={handleClose} to="/category" className="nav-link">
-                Category
+                <i class="fa-solid fa-puzzle-piece"></i> Category
               </Link>
             </ListGroup.Item>
             <ListGroup.Item>
               <Link onClick={handleClose} to="" className="nav-link">
-                products
+                <i class="fa-brands fa-product-hunt"></i> products
               </Link>
             </ListGroup.Item>
             <ListGroup.Item>
               <Link onClick={handleClose} to="" className="nav-link">
-                payment methods
+                <i class="fa-solid fa-money-check"></i> payment methods
               </Link>
             </ListGroup.Item>
             <ListGroup.Item>
               <Link onClick={handleClose} to="" className="nav-link">
-                user
+                <i class="fa-solid fa-users"></i> user
               </Link>
             </ListGroup.Item>
             <ListGroup.Item>
               <Link onClick={handleClose} to="" className="nav-link">
-                orders
+                <i class="fa-solid fa-cart-shopping"></i> orders
               </Link>
             </ListGroup.Item>
             <ListGroup.Item>
               <Link onClick={handleClose} to="" className="nav-link">
-                reviews
+                <i class="fa-solid fa-chalkboard-user"></i> reviews
               </Link>
             </ListGroup.Item>
             <ListGroup.Item>
               <Link onClick={handleClose} to="" className="nav-link">
-                setting
+                <i class="fa-solid fa-gear"></i> setting
               </Link>
             </ListGroup.Item>
           </ListGroup>

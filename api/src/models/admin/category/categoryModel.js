@@ -1,4 +1,4 @@
-import categorySchema from "./categorySchema";
+import categorySchema from "./categorySchema.js";
 
 //insert categorySchema
 export const insertCategory = (obj) => {

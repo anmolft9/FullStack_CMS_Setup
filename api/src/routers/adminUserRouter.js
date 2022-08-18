@@ -8,7 +8,7 @@ import {
   emailVerificationValidation,
   loginValidation,
   newAdminUserValidation,
-} from "../middlewares/joiValidation/adminUserValidation.js";
+} from "../middlewares/joiValidation/joiValidation.js";
 
 import {
   findOneAdminUser,

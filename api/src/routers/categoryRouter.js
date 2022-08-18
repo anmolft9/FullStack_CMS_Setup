@@ -1,18 +1,21 @@
 import express from "express";
-import { insertCategory } from "../models/admin/category/categoryModel";
+import { newCategoryValidation } from "../middlewares/joiValidation/joiValidation.js";
+import { insertCategory } from "../models/admin/category/categoryModel.js";
+import slugify from "slugify";
 
 const router = express.Router();
 
 ///insert new category
-router.post("/", async (req, res, next) => {
+router.post("/", newCategoryValidation, async (req, res, next) => {
   try {
     // console.log(req.body);
+    req.body.slug = slugify(req.body.name, { lower: true, trim: true });
     const result = await insertCategory(req.body);
 
     result?._id
       ? res.json({
           status: "success",
-          message: "category list",
+          message: "category added",
         })
       : res.json({
           status: "error",

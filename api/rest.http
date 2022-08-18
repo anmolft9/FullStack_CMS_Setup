@@ -10,7 +10,7 @@ Content-Type: application/json
    
     "fName": "Anmol",
     "lName": "Bhattarai",
-    "email": "annn@gmail.com",
+    "email": "annnR@gmail.com",
     "password": "anmolll",
     "phone": "0444333444",
     "address": "Queanbeyan",
@@ -37,8 +37,8 @@ Content-Type: application/json
 
 {
 "status": "active",
-"name": "electronics",
-"parentId": "ididididididididi"
+"name": "laptop",
+"parentId": "62fd7a704cb0a5b67129271b"
 
 }
 
