@@ -32,13 +32,17 @@ Content-Type: application/json
 
 
 ###category apis
+
+###post the categoey
 POST http://localhost:8000/api/v1/category
 Content-Type: application/json
 
 {
 "status": "active",
-"name": "laptop",
+"name": "mobile",
 "parentId": "62fd7a704cb0a5b67129271b"
 
 }
 
+### get categories
+GET http://localhost:8000/api/v1/category
