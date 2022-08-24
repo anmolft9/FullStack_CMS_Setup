@@ -49,4 +49,14 @@ router.post("/", newCategoryValidation, async (req, res, next) => {
   }
 });
 
+///update category
+
+router.put("/", (req, res, next) => {
+  try {
+    console.log(req.body);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export default router;
