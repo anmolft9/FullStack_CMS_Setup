@@ -22,7 +22,7 @@ export const Header = () => {
     navigate("/");
   };
   return (
-    <Navbar collapseOnSelect bg="info" variant="light" expand="md">
+    <Navbar collapseOnSelect bg="light" variant="light" expand="md">
       <Container>
         <div>
           {user._id && (

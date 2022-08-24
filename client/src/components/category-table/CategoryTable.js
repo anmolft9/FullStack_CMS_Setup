@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getCategoriesAction } from "../../pages/categories/categoryAction.js";
+import {
+  deleteCategoryAction,
+  getCategoriesAction,
+} from "../../pages/categories/categoryAction.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Row, Table } from "react-bootstrap";
 import { EditCatForm } from "../cat-form/EditCatForm.js";
@@ -17,8 +20,11 @@ export const CategoryTable = () => {
   const parentCats = categories.filter(({ parentId }) => !parentId);
   const childCats = categories.filter(({ parentId }) => parentId);
 
-  const handleOnDel = () => {
-    console.log("clicked");
+  const handleOnDelete = (_id) => {
+    if (window.confirm("Are you sure you want to delete this category")) {
+      console.log("clicked");
+      dispatch(deleteCategoryAction(_id));
+    }
   };
   const handleOnEdit = (cat) => {
     setSelectedCategory(cat);
@@ -29,7 +35,7 @@ export const CategoryTable = () => {
 
   return (
     <Row className="m-5">
-      <EditCatForm />
+      <EditCatForm selectedCategory={selectedCategory} />
       <Table>
         <thead>
           <th>Status</th>
@@ -41,7 +47,7 @@ export const CategoryTable = () => {
           {parentCats.length > 0 &&
             parentCats.map((item, index) => (
               <>
-                <tr key={item._id} className="bg-dark">
+                <tr key={item._id} style={{ backgroundColor: "#9ED2C6" }}>
                   <td
                     className={
                       item.status === "active" ? "text-success" : "text-danger"
@@ -53,7 +59,12 @@ export const CategoryTable = () => {
 
                   <td>{item.parentId ? "Children" : "Parent"}</td>
                   <td>
-                    <Button variant="danger">Delete</Button>{" "}
+                    <Button
+                      variant="danger"
+                      onClick={() => handleOnDelete(item._id)}
+                    >
+                      Delete
+                    </Button>{" "}
                     <Button
                       variant="warning"
                       onClick={() => handleOnEdit(item)}
@@ -81,7 +92,7 @@ export const CategoryTable = () => {
                         <td>{cat.parentId ? "Children" : "Parent"}</td>
                         <td>
                           <Button
-                            onClick={() => handleOnDel()}
+                            onClick={() => handleOnDelete(cat._id)}
                             variant="danger"
                           >
                             Delete

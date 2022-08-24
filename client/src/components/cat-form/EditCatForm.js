@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { postCategory } from "../../helpers/axiosHelper.js";
-import { postCategoriesAction } from "../../pages/categories/categoryAction.js";
+import {
+  postCategoriesAction,
+  updateCategoriesAction,
+} from "../../pages/categories/categoryAction.js";
 import { CustomModal } from "../modal/Modal.js";
 
 // import { CustomInputField } from "../customInputField/CustomInputField.js";
 
-export const EditCatForm = () => {
+export const EditCatForm = ({ selectedCategory }) => {
   const [form, setForm] = useState({});
   const { categories } = useSelector((state) => state.category);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setForm(selectedCategory);
+  }, [selectedCategory]);
 
   const handleOnChange = (e) => {
     let { checked, name, value } = e.target;
@@ -27,7 +34,9 @@ export const EditCatForm = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     // alert(form.toString());
-    dispatch(postCategoriesAction(form));
+
+    const { __v, slug, ...rest } = form;
+    dispatch(updateCategoriesAction(rest));
 
     // console.log(form);
   };
@@ -44,6 +53,7 @@ export const EditCatForm = () => {
                 name="status"
                 label="status"
                 type="switch"
+                checked={form.status === "active"}
                 onChange={handleOnChange}
               />
             </Form.Group>
@@ -57,7 +67,12 @@ export const EditCatForm = () => {
                   categories.map(
                     (item) =>
                       !item.parentId && (
-                        <option value={item._id}>{item.name}</option>
+                        <option
+                          value={item._id}
+                          selected={item._id === form.parentId}
+                        >
+                          {item.name}
+                        </option>
                       )
                   )}
               </Form.Select>
@@ -70,6 +85,7 @@ export const EditCatForm = () => {
               <Form.Control
                 name="name"
                 type="text"
+                value={form.name}
                 placeholder="enter category"
                 onChange={handleOnChange}
               />
@@ -80,7 +96,7 @@ export const EditCatForm = () => {
 
           <Col md="2">
             <Button variant="primary" type="submit">
-              Edit{" "}
+              Update category
             </Button>
           </Col>
         </Row>

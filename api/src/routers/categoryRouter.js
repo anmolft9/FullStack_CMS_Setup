@@ -1,9 +1,15 @@
 import express from "express";
-import { newCategoryValidation } from "../middlewares/joiValidation/joiValidation.js";
 import {
+  newCategoryValidation,
+  updateCategoryValidation,
+} from "../middlewares/joiValidation/joiValidation.js";
+import {
+  deleteCategory,
   getAllCategories,
   getCategoryById,
+  hasChildCategory,
   insertCategory,
+  updateCategoryById,
 } from "../models/admin/category/categoryModel.js";
 import slugify from "slugify";
 
@@ -51,9 +57,52 @@ router.post("/", newCategoryValidation, async (req, res, next) => {
 
 ///update category
 
-router.put("/", (req, res, next) => {
+router.put("/", updateCategoryValidation, async (req, res, next) => {
   try {
-    console.log(req.body);
+    const hasChildCat = await hasChildCategory(req.body._id);
+    if (hasChildCat) {
+      return res.json({
+        status: "error",
+        message:
+          "this category has child categories, please delete or reassign them to another category before taking this action",
+      });
+    }
+
+    console.log(req.body, "ghvbnvbnvbnnnnnnnnnnnnnnnn");
+    const catUpdate = await updateCategoryById(req.body);
+
+    res.json({
+      status: "success",
+      message: "category updated",
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+///delete category
+router.delete("/:_id", async (req, res, next) => {
+  try {
+    const { _id } = req.params;
+    const hasChildCat = await hasChildCategory(_id);
+    if (hasChildCat) {
+      return res.json({
+        status: "success",
+        message: "this category has been deleted",
+      });
+    }
+
+    // console.log(req.body, "ghvbnvbnvbnnnnnnnnnnnnnnnn");
+    const catDelete = await deleteCategory(_id);
+    catDelete?._id
+      ? res.json({
+          status: "success",
+          message: "category deleted",
+        })
+      : res.json({
+          status: "error",
+          message: "category not delete",
+        });
   } catch (error) {
     next(error);
   }

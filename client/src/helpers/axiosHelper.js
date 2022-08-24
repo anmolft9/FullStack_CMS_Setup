@@ -64,3 +64,22 @@ export const postCategory = (obj) => {
   };
   return apiProcessor(option);
 };
+
+///update category
+export const updateCategory = (obj) => {
+  const option = {
+    method: "put",
+    url: categoryEP,
+    data: obj,
+  };
+  return apiProcessor(option);
+};
+
+///delete category
+export const deleteCategory = (_id) => {
+  const option = {
+    method: "delete",
+    url: categoryEP + "/" + _id,
+  };
+  return apiProcessor(option);
+};
