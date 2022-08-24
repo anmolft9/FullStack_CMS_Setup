@@ -46,3 +46,7 @@ Content-Type: application/json
 
 ### get categories
 GET http://localhost:8000/api/v1/category
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJzYWxAZ21haWwuY29tIiwiaWF0IjoxNjYxMzE1ODE1LCJleHAiOjE2NjEzMTcwMTV9.VVxBjUHAeEKYo8uJk3aMBDlM1oqfkP2Jrrt5TWbu0Qk
+
+
+

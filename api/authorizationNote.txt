@@ -9,3 +9,14 @@ Step 1:
 4. store token in the browser session
    a. accessJWT goes in the sessionStorage
    a. refreshJWT goes in the localStorage
+
+
+
+STEP 2: protect server 
+
+1.recieve accessJWT as a authorization header
+2. verify if accessJWT is valid
+3. verify if accessJWT exist in the session table
+4. then, get the use info by email which is available through JWT decode
+5. do next()
+6. if any of the step fails above, return unauthorization error message

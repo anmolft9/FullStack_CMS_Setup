@@ -87,7 +87,7 @@ router.delete("/:_id", async (req, res, next) => {
     const hasChildCat = await hasChildCategory(_id);
     if (hasChildCat) {
       return res.json({
-        status: "success",
+        status: "error",
         message: "this category has been deleted",
       });
     }

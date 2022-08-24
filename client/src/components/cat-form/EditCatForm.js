@@ -35,7 +35,7 @@ export const EditCatForm = ({ selectedCategory }) => {
     e.preventDefault();
     // alert(form.toString());
 
-    const { __v, slug, ...rest } = form;
+    const { __v, slug, createdAt, updatedAt, ...rest } = form;
     dispatch(updateCategoriesAction(rest));
 
     // console.log(form);
