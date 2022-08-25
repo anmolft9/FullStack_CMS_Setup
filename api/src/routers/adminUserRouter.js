@@ -40,6 +40,7 @@ router.get("/", adminAuth, (req, res, next) => {
     res.json({
       status: "success",
       message: "todo",
+      user,
     });
   } catch (error) {
     next(error);

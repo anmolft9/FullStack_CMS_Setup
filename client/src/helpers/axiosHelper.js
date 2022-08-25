@@ -3,11 +3,11 @@ const rooturl = process.env.REACT_APP_API_ENDPOINT;
 const adminUserEP = rooturl + "admin-user";
 const categoryEP = "http://localhost:8000/api/v1/category";
 
-const apiProcessor = async ({ method, url, data, isPrivate }) => {
+const apiProcessor = async ({ method, url, data, isPrivate, token }) => {
   try {
     const headers = isPrivate
       ? {
-          Authorization: sessionStorage.getItem("accessJWT"),
+          Authorization: token || sessionStorage.getItem("accessJWT"),
         }
       : null;
     const response = await axios({
@@ -18,6 +18,25 @@ const apiProcessor = async ({ method, url, data, isPrivate }) => {
     });
     return response.data;
   } catch (error) {
+    let message = error.message;
+    if (error.response && error.response.status === 401) {
+      sessionStorage.removeItem("accessJWT");
+      localStorage.removeItem("refreshJWT");
+    }
+
+    if (error.response && error.response.data) {
+      message = error.response.data.message;
+    }
+
+    if (message === "jwt expired") {
+      //call thje api to get new accessJET and store in the session and recall the api Processor
+      const accessJWT = await getNewAccessToken();
+
+      if (accessJWT) {
+        return apiProcessor({ method, url, data, isPrivate, token });
+      }
+    }
+
     return {
       status: "success",
       message: error.message,
@@ -52,14 +71,29 @@ export const loginAdminUser = (data) => {
   return apiProcessor(option);
 };
 
-///
-export const getAdminUser = (data) => {
+///login adming user
+export const getAdminUser = (token) => {
   const option = {
     method: "get",
     url: adminUserEP,
     isPrivate: true,
+    token,
   };
   return apiProcessor(option);
+};
+
+///fetch new token
+export const getNewAccessToken = async () => {
+  const token = localStorage.getItem("refreshJWT");
+  const option = {
+    method: "get",
+    url: adminUserEP + "/accessjwt",
+    isPrivate: true,
+    token,
+  };
+  const { status, accessJWT } = await apiProcessor(option);
+  status === "success" && sessionStorage.setItem("accessJWT", accessJWT);
+  return accessJWT;
 };
 
 ///////category api
