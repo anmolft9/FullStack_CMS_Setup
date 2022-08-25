@@ -30,6 +30,11 @@ Content-Type: application/json
 
 }
 
+### get new accessJWT
+GET http://localhost:8000/api/v1/admin-user/accessjwt
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJzYWxAZ21haWwuY29tIiwiaWF0IjoxNjYxMzg5NTIxLCJleHAiOjE2NjEzOTA3MjF9.eCfZ7fQFahIH6rCvDWUsMgLpcsaBv-0chAE6oAPIiDk
+
+
 
 ###category apis
 

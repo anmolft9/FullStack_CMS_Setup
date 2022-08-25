@@ -42,12 +42,12 @@ export const EditCatForm = ({ selectedCategory }) => {
   };
 
   return (
-    <CustomModal title="Edit Category">
-      <Form className="border py-4 mb-5" onSubmit={handleOnSubmit}>
+    <CustomModal className="text-center" title="Edit Category">
+      <Form className="py-4 mb-5" onSubmit={handleOnSubmit}>
         <h4 className="text-center mb-3">Edit Category</h4>
 
         <Row className="g-2">
-          <Col md="2">
+          <Col lg="2">
             <Form.Group>
               <Form.Check
                 name="status"
@@ -59,7 +59,7 @@ export const EditCatForm = ({ selectedCategory }) => {
             </Form.Group>
           </Col>
           {/* ////////// */}
-          <Col md="4">
+          <Col lg="4">
             <Form.Group>
               <Form.Select name="parentId" onChange={handleOnChange}>
                 <option value="">select parent category</option>
@@ -80,7 +80,7 @@ export const EditCatForm = ({ selectedCategory }) => {
           </Col>
           {/* ////////// */}
 
-          <Col md="4">
+          <Col lg="4">
             <Form.Group>
               <Form.Control
                 name="name"
@@ -94,7 +94,7 @@ export const EditCatForm = ({ selectedCategory }) => {
 
           {/* ////////// */}
 
-          <Col md="2">
+          <Col lg="2">
             <Button variant="primary" type="submit">
               Update category
             </Button>

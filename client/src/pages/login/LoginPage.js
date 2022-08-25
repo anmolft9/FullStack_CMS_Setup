@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { CustomInputField } from "../../components/customInputField/CustomInputField";
 import { Footer } from "../../components/footer/Footer";
 import { Header } from "../../components/header/Header";
-import { loginUserAction } from "./userAction";
+import { autoLogin, loginUserAction } from "./userAction";
 import { Link } from "react-router-dom";
 
 const LoginPage = () => {
@@ -19,7 +19,7 @@ const LoginPage = () => {
     (location.state && location.state.from && location.state.from.pathname) ||
     "/dashboard";
   useEffect(() => {
-    user._id && navigate(origin);
+    user._id ? navigate(origin) : dispatch(autoLogin());
   }, [user, navigate]);
 
   const handleOnChange = (e) => {

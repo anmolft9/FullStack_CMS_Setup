@@ -20,3 +20,9 @@ STEP 2: protect server
 4. then, get the use info by email which is available through JWT decode
 5. do next()
 6. if any of the step fails above, return unauthorization error message
+
+
+
+Frontent auto login
+case 1: when you are refreshing the same window
+case 2: when you open link to new tab or come back and revisit the site  

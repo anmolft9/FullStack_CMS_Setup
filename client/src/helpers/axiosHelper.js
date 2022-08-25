@@ -52,6 +52,16 @@ export const loginAdminUser = (data) => {
   return apiProcessor(option);
 };
 
+///
+export const getAdminUser = (data) => {
+  const option = {
+    method: "get",
+    url: adminUserEP,
+    isPrivate: true,
+  };
+  return apiProcessor(option);
+};
+
 ///////category api
 export const fetchCategory = (_id) => {
   const option = {

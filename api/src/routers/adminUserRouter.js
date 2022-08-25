@@ -16,7 +16,12 @@ import {
   updateOneAdminUser,
 } from "../models/admin/AdminUserModel.js";
 import { v4 as uuidv4 } from "uuid";
-import { createJWTs, signAccessJWT } from "../helpers/jwtHelper.js";
+import {
+  createJWTs,
+  signAccessJWT,
+  verifyRefreshJWT,
+} from "../helpers/jwtHelper.js";
+import { adminAuth } from "../middlewares/auth-middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -27,6 +32,19 @@ const router = express.Router();
 //insert into the db
 //create unique verification code
 //send create a like pointing to out drontend with the email and verification code and send to their email
+
+////get user method
+router.get("/", adminAuth, (req, res, next) => {
+  try {
+    const user = req.adminInfo;
+    res.json({
+      status: "success",
+      message: "todo",
+    });
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.post("/", newAdminUserValidation, async (req, res, next) => {
   try {
@@ -145,6 +163,38 @@ router.post("/login", loginValidation, async (req, res, next) => {
       message: "not valid login credentials",
     });
   } catch (error) {
+    next(error);
+  }
+});
+
+///geberate  bew accessJWT send back ti the client
+router.get("/accessjwt", async (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+
+    if (authorization) {
+      ///verify the token
+      const decoded = verifyRefreshJWT(authorization);
+      console.log(decoded);
+
+      //check if exist in db
+      if (decoded.email) {
+        const user = await findOneAdminUser({ email: decoded.email });
+        if (user?._id) {
+          ///create new accessJWT and return
+          return res.json({
+            status: "success",
+            accessJWT: await signAccessJWT({ email: decoded.email }),
+          });
+        }
+      }
+    }
+    res.status(401).json({
+      status: "error",
+      message: "UnAuthenticated",
+    });
+  } catch (error) {
+    error.status = 401;
     next(error);
   }
 });
