@@ -9,6 +9,7 @@ import { Dashboard } from "./pages/dashboard/Dashboard.js";
 import { Product } from "./pages/products/Product";
 import { PrivateRouter } from "./components/private-router/PrivateRouter";
 import { Category } from "./pages/categories/Category";
+import { PaymentMethod } from "./pages/payment-method/PaymentMethod";
 
 function App() {
   return (
@@ -30,6 +31,14 @@ function App() {
             element={
               <PrivateRouter>
                 <Product />
+              </PrivateRouter>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <PrivateRouter>
+                <PaymentMethod />
               </PrivateRouter>
             }
           />

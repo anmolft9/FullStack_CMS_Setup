@@ -2,6 +2,7 @@ import axios from "axios";
 const rooturl = process.env.REACT_APP_API_ENDPOINT;
 const adminUserEP = rooturl + "admin-user";
 const categoryEP = "http://localhost:8000/api/v1/category";
+const PMEP = "http://localhost:8000/api/v1/payment-method";
 
 const apiProcessor = async ({ method, url, data, isPrivate, token }) => {
   try {
@@ -137,3 +138,24 @@ export const deleteCategory = (_id) => {
   };
   return apiProcessor(option);
 };
+
+///////////////////////////////////////payment api
+export const fetchPM = () => {
+  const option = {
+    method: "get",
+    url: PMEP,
+    isPrivate: true,
+  };
+  return apiProcessor(option);
+};
+
+// ///post new payment
+// export const postPM = () => {
+//   const option = {
+//     method: "post",
+//     url: PMEP,
+
+//     isPrivate: true,
+//   };
+//   return apiProcessor(option);
+// };

@@ -19,8 +19,10 @@ dbConnection();
 import adminUserRouter from "./src/routers/adminUserRouter.js";
 import categoryRouter from "./src/routers/categoryRouter.js";
 import { adminAuth } from "./src/middlewares/auth-middleware/authMiddleware.js";
+import paymentMethodRouter from "./src/routers/paymentMethodRouter.js";
 app.use("/api/v1/admin-user", adminUserRouter);
 app.use("/api/v1/category", adminAuth, categoryRouter);
+app.use("/api/v1/payment-method", paymentMethodRouter);
 
 app.get("/", (req, res) => {
   res.json({

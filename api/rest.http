@@ -54,4 +54,21 @@ GET http://localhost:8000/api/v1/category
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJzYWxAZ21haWwuY29tIiwiaWF0IjoxNjYxMzE1ODE1LCJleHAiOjE2NjEzMTcwMTV9.VVxBjUHAeEKYo8uJk3aMBDlM1oqfkP2Jrrt5TWbu0Qk
 
 
+###get method for payment
+GET http://localhost:8000/api/v1/payment-method
+
+
+###post method for payment
+PUT http://localhost:8000/api/v1/payment-method
+Content-Type: application/json
+
+{   "_id" : "6306fc9616f12b5a69aba584",
+     "status": "inactive",
+    "name": "Pay By Credit Card",
+    "description": "Follow the instruction please"
+}
+
+###delete
+Delete http://localhost:8000/api/v1/payment-method/6306fc9616f12b5a69aba584
+
 
